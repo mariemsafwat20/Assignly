@@ -1,0 +1,66 @@
+
+// Input Fields
+input {
+  font-size: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 0 5px rgb(23 51 135 / 46%);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+  &:focus {
+    border-color: #173387;
+  }
+  
+  &::placeholder {
+    color: #9aa3b1;
+    font-size: 0.9rem;
+    opacity: 1;
+  }
+}
+
+// Form Labels
+.form-label {
+  color: #36a389;
+  font-family: "Raleway", sans-serif;
+}
+
+// Register Button
+.btn {
+  font-family: "Playfair Display", serif;
+  background-color: #173387;
+  color: #f3f6fa;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #102768;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(16, 39, 104, 0.3);
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+}
+
+// Auth Link
+.auth-link {
+  p {
+    font-family: "Poppins", sans-serif;
+    color: #545454;
+    font-size: 0.95rem;
+  }
+
+  a {
+    font-family: "Poppins", sans-serif;
+    color: #97c2f8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #5ea3fa;
+      text-decoration: underline;
+    }
+  }
+}

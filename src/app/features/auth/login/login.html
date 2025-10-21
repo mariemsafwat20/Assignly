@@ -1,0 +1,63 @@
+
+<app-auth-card subtitle="Welcome — Sign in to your account to continue.">
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
+        <!-- Email -->
+        <div class="mb-2">
+            <label for="email" class="form-label fw-semibold mb-1">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email"
+                [ngClass]="{ 'is-valid': email.valid && (email.dirty || email.touched),
+                    'is-invalid': email.invalid && (email.dirty || email.touched)
+                }"
+            />
+            <!-- Email Validation -->
+            @if(email.invalid && (email.dirty || email.touched)){
+                <div class="invalid-feedback">
+                    @if (email.errors?.['required']) {
+                        <p>Email is required.</p>
+                    }@else if (email.errors?.['pattern']) {
+                       <p>Please enter a valid email format.</p>
+                    }  
+                </div>
+            }
+        </div>
+    
+        <!-- Password -->
+        <div class="mb-2">
+            <label for="password" class="form-label fw-semibold mb-1">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter your password"
+                [ngClass]="{ 'is-valid': password.valid && (password.dirty || password.touched),
+                    'is-invalid': password.invalid && (password.dirty || password.touched)
+                }"
+            />
+            <!-- Password Validation -->
+            @if(password.invalid && (password.dirty || password.touched)){
+                <div class="invalid-feedback">
+                    @if (password.errors?.['required']) {
+                        <p>Password is required.</p>
+                    }@else if (password.errors?.['pattern']) {
+                       <p>Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character.</p>
+                    }  
+                </div>
+            }
+        </div>
+    
+        <!-- Submit Button -->
+        <div class="d-grid mt-4 w-50 m-auto">
+            <button type="submit" class="btn btn-md" [disabled]="form.invalid">
+                Login
+            </button>
+        </div>
+    
+        <!-- Forgot Password -->
+        <div class="auth-link text-center mt-2">
+            <a routerLink="/auth/forgot-password">Forgot Password?</a>
+
+            <!-- Go To Register Page -->
+            <p>Don't have an account?
+                <a routerLink="/auth/register">
+                    Sign up
+                </a>
+            </p>
+        </div>
+    </form>
+</app-auth-card>      
