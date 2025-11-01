@@ -4,8 +4,8 @@
   font-family: "Raleway", sans-serif;
 }
 
-// Input Fields
-:host ::ng-deep .p-password-input, :host ::ng-deep .p-inputtext{
+// Input Fields(pInputText, p-password, p-select)
+:host ::ng-deep .p-password-input, :host ::ng-deep .p-inputtext, :host ::ng-deep .p-select{
   width: 100%;
   background-color: #fff !important;
   color: #000 !important;
@@ -16,23 +16,50 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+// Inputs Placeholder
 :host ::ng-deep .p-password-input::placeholder, :host ::ng-deep .p-inputtext::placeholder {
   color: #9aa3b1 !important;
   font-size: 0.9rem;
 }
 
-:host ::ng-deep .p-password-input:focus, :host ::ng-deep .p-inputtext:focus {
+// Inputs Focus
+:host ::ng-deep .p-password-input:focus, :host ::ng-deep .p-inputtext:focus, :host ::ng-deep .p-select:focus-within {
   border-color: #173387 !important;
 }
 
-// Hide & Visible Icon
-:host ::ng-deep .p-password-toggle-mask-icon {
-  right: 30px;
+// Role Dropdown
+:host ::ng-deep .p-select-label, :host ::ng-deep .p-select-option{
+  color: #000;
+}
+
+:host ::ng-deep .p-select-list{
+  background-color: #ffffff;
+}
+
+:host ::ng-deep .p-component{
+  border: none;
+}
+
+/* Optional: style dropdown panel */
+:host ::ng-deep .p-select-panel {
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+// Remove the clear icon from the dropdown.
+:host ::ng-deep .p-select-option-blank-icon {
+  display: none !important;
+}
+
+// Hide & Visible Icon & Dropdown Icon
+:host ::ng-deep .p-icon
+{
+  margin-right: 18px;
   color: #1B3C53 !important;
   transition: color 0.3s ease;
 }
 
-:host ::ng-deep .p-password-toggle-mask-icon:hover {
+:host ::ng-deep .p-icon:hover {
   cursor: pointer;
   color: #0f2230 !important;
   transform: scale(1.2);

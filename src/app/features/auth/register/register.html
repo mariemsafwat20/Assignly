@@ -38,7 +38,7 @@
         </div>
     
         <!-- Password -->
-        <div class="mb-2 password-field">
+        <div class="mb-2">
             <label for="password" class="form-label fw-semibold mb-1">Password</label>
             
             <p-password id="password" formControlName="password" placeholder="Enter your password"
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Confirm Password -->
-        <div class="mb-2 password-field">
+        <div class="mb-2">
             <label for="confirmPassword" class="form-label fw-semibold mb-1">Confirm Password</label>
 
             <p-password id="confirmPassword" formControlName="confirmPassword" placeholder="Enter your confirm password"
@@ -76,13 +76,32 @@
                 <div class="invalid-feedback d-block">
                     @if (confirmPassword.errors?.['required']) {
                         <p>Confirm Password is required.</p>
-                    } @else if (confirmPassword.errors?.['pattern']) {                      
+                    }@else if (confirmPassword.errors?.['pattern']) {                      
                         <p>Confirm Password must contain at least 6 characters, one uppercase, one lowercase, one number, and one special character.</p>
+                    }@else if (confirmPassword?.errors?.['passwordMismatch'] && confirmPassword?.touched) {
+                       <p>Passwords do not match.</p>
                     }
                 </div>
             }
         </div>
     
+        <!-- Choosing a role from the dropdown -->
+        <div class="mb-2">
+            <label for="role" class="form-label fw-semibold mb-1">Role</label>
+
+            <p-select formControlName="role" [options]="roles" optionLabel="name" placeholder="Select a Role" [(ngModel)]="selectedRole"
+                [checkmark]="true" />
+
+            <!-- role Validation -->
+            @if (role.invalid && (role.dirty || role.touched)) {
+                <div class="invalid-feedback d-block">
+                    @if (role.errors?.['required']) {
+                        <p> Role is required.</p>
+                    }
+                </div>
+            }
+        </div>
+
         <!-- Submit Button -->
         <div class="d-grid mt-4 w-50 m-auto">
             <button type="submit" class="btn btn-md" [disabled]="registerForm.invalid">
