@@ -4,13 +4,18 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { RouterLink } from '@angular/router';
 import { AuthCard } from '../../../shared/components/auth-card/auth-card';
 
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+
 @Component({
   selector: 'app-login',
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    AuthCard
+    AuthCard,
+    PasswordModule,
+    InputTextModule,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss'

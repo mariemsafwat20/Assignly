@@ -1,41 +1,67 @@
-
-// Input Fields
-input {
-  font-size: 1rem;
-  border-radius: 8px;
-  width: 100%;
-  box-shadow: 0 0 5px rgb(23 51 135 / 46%);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  
-  &:focus {
-    border-color: #173387;
-  }
-  
-  &::placeholder {
-    color: #9aa3b1;
-    font-size: 0.9rem;
-    opacity: 1;
-  }
-}
-
 // Form Labels
 .form-label {
-  color: #36a389;
+  color: #456882;
   font-family: "Raleway", sans-serif;
 }
 
-// Register Button
+// Input Fields(pInputText, p-password, p-select)
+:host ::ng-deep .p-password-input, :host ::ng-deep .p-inputtext{
+  width: 100%;
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ced4da !important;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(27, 60, 83, 0.46);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+// Inputs Placeholder
+:host ::ng-deep .p-password-input::placeholder, :host ::ng-deep .p-inputtext::placeholder {
+  color: #9aa3b1 !important;
+  font-size: 0.9rem;
+}
+
+// Inputs Focus
+:host ::ng-deep .p-password-input:focus, :host ::ng-deep .p-inputtext:focus {
+  border-color: #173387 !important;
+}
+
+// Hide & Visible Icon
+:host ::ng-deep .p-password-toggle-mask-icon
+{
+  margin-right: 18px;
+  color: #1B3C53 !important;
+  transition: color 0.3s ease;
+}
+
+:host ::ng-deep .p-password-toggle-mask-icon:hover {
+  cursor: pointer;
+  color: #0f2230 !important;
+  transform: scale(1.2);
+}
+
+// Validation Message
+.invalid-feedback{
+  font-size: 0.85rem;    
+  
+  p{
+    margin-bottom: 0;      
+  }
+}
+
+// Login Button
 .btn {
   font-family: "Playfair Display", serif;
-  background-color: #173387;
+  background-color: #1B3C53;
   color: #f3f6fa;
   border: none;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #102768;
+    background-color: #0f2230;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(16, 39, 104, 0.3);
+    box-shadow: 0 0 5px rgba(27, 60, 83, 0.46);
   }
   
   &:disabled {
@@ -44,7 +70,7 @@ input {
   }
 }
 
-// Auth Link
+// Auth Link(Go To Register Page)
 .auth-link {
   p {
     font-family: "Poppins", sans-serif;
@@ -54,12 +80,12 @@ input {
 
   a {
     font-family: "Poppins", sans-serif;
-    color: #97c2f8;
+    color: #456882;
     text-decoration: none;
     transition: color 0.3s ease;
 
     &:hover {
-      color: #5ea3fa;
+      color: #1B3C53;
       text-decoration: underline;
     }
   }
