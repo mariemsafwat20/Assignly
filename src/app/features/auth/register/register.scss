@@ -4,6 +4,22 @@
   font-family: "Raleway", sans-serif;
 }
 
+// Icons of input
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #9aa3b1;
+  pointer-events: none;
+  z-index: 10;
+}
+
+//  Add space for the icon inside inputs
+input[pInputText], :host ::ng-deep .p-password-input {
+  padding-left: 2rem !important;
+}
+
 // Input Fields(pInputText, p-password, p-select)
 :host ::ng-deep .p-password-input, :host ::ng-deep .p-inputtext, :host ::ng-deep .p-select{
   width: 100%;
@@ -32,18 +48,15 @@
   color: #000;
 }
 
+// Role Menu
 :host ::ng-deep .p-select-list{
   background-color: #ffffff;
+  gap: 0;
+  padding: 0;
 }
 
 :host ::ng-deep .p-component{
   border: none;
-}
-
-/* Optional: style dropdown panel */
-:host ::ng-deep .p-select-panel {
-  border-radius: 10px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
 
 // Remove the clear icon from the dropdown.
@@ -51,15 +64,15 @@
   display: none !important;
 }
 
-// Hide & Visible Icon & Dropdown Icon
-:host ::ng-deep .p-icon
+// Hide & Visible Icon
+:host ::ng-deep .p-password-toggle-mask-icon
 {
   margin-right: 18px;
   color: #1B3C53 !important;
   transition: color 0.3s ease;
 }
 
-:host ::ng-deep .p-icon:hover {
+:host ::ng-deep .p-password-toggle-mask-icon:hover {
   cursor: pointer;
   color: #0f2230 !important;
   transform: scale(1.2);

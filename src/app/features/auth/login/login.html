@@ -4,10 +4,13 @@
         <!-- Email -->
         <div class="mb-2">
             <label for="email" class="form-label fw-semibold mb-1">Email</label>
-            <input pInputText type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email"
-                [class.is-valid]="email.valid && (email.dirty || email.touched)"
-                [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
-            />
+            <div class="position-relative">
+                <i class="fa-solid fa-envelope input-icon"></i>
+                <input pInputText type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email"
+                    [class.is-valid]="email.valid && (email.dirty || email.touched)"
+                    [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+                />
+            </div>
             <!-- Email Validation -->
             @if(email.invalid && (email.dirty || email.touched)){
                 <div class="invalid-feedback">
@@ -23,13 +26,15 @@
         <!-- Password -->
         <div class="mb-2">
             <label for="password" class="form-label fw-semibold mb-1">Password</label>
-            
-            <p-password id="password" formControlName="password" placeholder="Enter your password"
-                [feedback]="false" [toggleMask]="true" styleClass="w-100"
-                [inputStyleClass]="'form-control' + 
-                    (password.valid && (password.dirty || password.touched) ? 'is-valid' : '') + 
-                    (password.invalid && (password.dirty || password.touched) ? ' is-invalid' : '')">
-            </p-password>
+            <div class="position-relative">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <p-password id="password" formControlName="password" placeholder="Enter your password"
+                    [feedback]="false" [toggleMask]="true" styleClass="w-100"
+                    [inputStyleClass]="'form-control' + 
+                        (password.valid && (password.dirty || password.touched) ? 'is-valid' : '') + 
+                        (password.invalid && (password.dirty || password.touched) ? ' is-invalid' : '')">
+                </p-password>
+            </div>
 
             <!-- Password Validation -->
             @if(password.invalid && (password.dirty || password.touched)){

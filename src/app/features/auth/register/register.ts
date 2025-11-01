@@ -94,11 +94,9 @@ export class Register {
     return null;
   }
 
-
   //  Role Dropdown
   roles = [
-    { name: 'Admin - Create Organization' },
-    { name: 'Admin - Join Organization' },
+    { name: 'Admin - Create Or Join Organization' },
     { name: 'Member - Join Organization' }
   ];
 
