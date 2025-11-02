@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 import { AuthCard } from '../../../shared/components/auth-card/auth-card';
 
-import { PasswordModule } from 'primeng/password';
-import { InputTextModule } from 'primeng/inputtext'; 
-import { SelectModule } from 'primeng/select';
-
 @Component({
-  selector: 'app-register',
+  selector: 'app-reset-password',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -17,26 +15,18 @@ import { SelectModule } from 'primeng/select';
     AuthCard,
     PasswordModule,
     InputTextModule,
-    SelectModule,
   ],
-  templateUrl: './register.html',
-  styleUrl: './register.scss'
+  templateUrl: './reset-password.html',
+  styleUrl: './reset-password.scss',
 })
-export class Register {
-  registerForm!: FormGroup;
+export class ResetPassword {
+  resetForm!: FormGroup;
   @Output() formSubmit = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
-      username: ['', [
-        Validators.required,
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
-      ]],
+    this.resetForm = this.fb.group({
       password: ['', [
         Validators.required,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
@@ -44,20 +34,13 @@ export class Register {
       confirmPassword: ['', [
         Validators.required,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
-      ]],
-      role: ['', [
-        Validators.required,
-      ]],
-    },
-    { validator: this.passwordMatchValidator }
+      ]]
+    },{ validators: this.passwordMatchValidator }
   );
   }
 
-  get username() { return this.registerForm.get('username')!; }
-  get email() { return this.registerForm.get('email')!; }
-  get password() { return this.registerForm.get('password')!; }
-  get confirmPassword() { return this.registerForm.get('confirmPassword')!; }
-  get role() { return this.registerForm.get('role')!; }
+  get password() { return this.resetForm.get('password')!; }
+  get confirmPassword() { return this.resetForm.get('confirmPassword')!; }
 
   // Custom validator to check password match
   passwordMatchValidator(form: AbstractControl) {
@@ -88,17 +71,5 @@ export class Register {
     return null;
   }
 
-  //  Role Dropdown
-  roles = [
-    { name: 'Admin - Create Or Join Organization' },
-    { name: 'Member - Join Organization' }
-  ];
-
-  selectedRole: any;
-
-  // Register Form
-  onRegister() {
-    if (this.registerForm.invalid) return;
-      this.formSubmit.emit(this.registerForm.value);
-  }
+  onReset(){}
 }

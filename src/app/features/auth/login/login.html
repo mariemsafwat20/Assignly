@@ -1,6 +1,6 @@
 
 <app-auth-card subtitle="Welcome — Sign in to your account to continue.">
-    <form [formGroup]="form" (ngSubmit)="onLogin()">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <!-- Email -->
         <div class="mb-2">
             <label for="email" class="form-label fw-semibold mb-1">Email</label>
@@ -50,14 +50,14 @@
     
         <!-- Submit Button -->
         <div class="d-grid mt-3 w-50 m-auto">
-            <button type="submit" class="btn btn-md" [disabled]="form.invalid">
+            <button type="submit" class="btn btn-md" [disabled]="loginForm.invalid">
                 Login
             </button>
         </div>
     
         <!-- Forgot Password -->
         <div class="auth-link text-center mt-2">
-            <a routerLink="/auth/forgot-password">Forgot Password?</a>
+            <a routerLink="/auth/forgotPassword">Forgot Password?</a>
 
             <!-- Go To Register Page -->
             <p>Don't have an account?

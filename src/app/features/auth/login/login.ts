@@ -22,13 +22,13 @@ import { PasswordModule } from 'primeng/password';
 })
 export class Login {
   
-  form!: FormGroup;
+  loginForm!: FormGroup;
   @Output() formSubmit = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.form = this.fb.group({
+    this.loginForm = this.fb.group({
       email: ['', [
         Validators.required,
         Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
@@ -40,16 +40,11 @@ export class Login {
     });
   }
 
-  get email() {
-    return this.form.get('email')!;
-  }
-
-  get password() {
-    return this.form.get('password')!;
-  }
+  get email() { return this.loginForm.get('email')!; }
+  get password() { return this.loginForm.get('password')!; }
 
   onLogin() {
-    if (this.form.invalid) return;
-      this.formSubmit.emit(this.form.value);
+    if (this.loginForm.invalid) return;
+      this.formSubmit.emit(this.loginForm.value);
   }
 }
