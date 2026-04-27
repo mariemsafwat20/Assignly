@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthCard } from '../../../shared/components/auth-card/auth-card';
 
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext'; 
 import { SelectModule } from 'primeng/select';
+import { AuthService } from '../../../core/Services/AuthServices/auth-service';
+
+import { IUser } from '../../../core/Model/iuser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +30,9 @@ export class Register {
   registerForm!: FormGroup;
   @Output() formSubmit = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder) {}
+  user!: IUser;
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -39,18 +45,18 @@ export class Register {
       ]],
       password: ['', [
         Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
       confirmPassword: ['', [
         Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
       role: ['', [
         Validators.required,
       ]],
     },
     { validator: this.passwordMatchValidator }
-  );
+    );
   }
 
   get username() { return this.registerForm.get('username')!; }
@@ -99,6 +105,37 @@ export class Register {
   // Register Form
   onRegister() {
     if (this.registerForm.invalid) return;
-      this.formSubmit.emit(this.registerForm.value);
+   
+    const registerUser: IUser = {
+      userName: this.username.value,
+      email: this.email.value,
+      password: this.password.value,
+      role: this.selectedRole === 'Admin - Create Or Join Organization' ? 1 : 0
+    };
+
+    console.log(registerUser);
+
+    this.authService.register(registerUser).subscribe({
+      next: (response) => {
+        console.log(response);
+        Swal.fire({
+          title: 'Registration successful.',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+         }).then(() => {
+          this.router.navigate(['/auth/confirmEmail']);
+        });
+      },
+      error: (error: any) => {
+       console.error(error);
+        Swal.fire({
+          title: 'Registration failed. Please try again.',
+          text: error.error?.message || 'Invalid credentials',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
   }
 }
