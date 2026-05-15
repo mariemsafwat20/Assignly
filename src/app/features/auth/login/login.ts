@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthCard } from '../../../shared/components/auth-card/auth-card';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import Swal from 'sweetalert2';
+import { ILogin, IUser } from '../../../core/Model/iuser';
+import { AuthService } from '../../../core/Services/AuthServices/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +28,8 @@ export class Login {
   loginForm!: FormGroup;
   @Output() formSubmit = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -43,8 +47,41 @@ export class Login {
   get email() { return this.loginForm.get('email')!; }
   get password() { return this.loginForm.get('password')!; }
 
+  // Login method
   onLogin() {
     if (this.loginForm.invalid) return;
-      this.formSubmit.emit(this.loginForm.value);
+
+    const loginUser: ILogin = {
+      email: this.email.value,
+      password: this.password.value
+    };
+
+    console.log("Logging in user:", loginUser);
+
+    this.authService.login(loginUser).subscribe({
+      next: (response) => {
+        console.log("Login successful:", response);
+
+        Swal.fire({
+          title: 'Login successful.',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          this.router.navigate(['/']);
+        });
+      },
+
+      error: (error: any) => {
+        console.error("Login failed:", error);
+
+        Swal.fire({
+          title: 'Login failed. Please try again.',
+          text: error.error?.message || 'Invalid credentials',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
   }
 }
