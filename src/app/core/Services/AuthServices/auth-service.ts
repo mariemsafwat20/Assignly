@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUser } from '../../Model/iuser';
+import { ILogin, IUser } from '../../Model/iuser';
 import { environment } from '../../../environment/environments';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   // Method for login
-  login(user:IUser):Observable<any> {
+  login(user:ILogin):Observable<any> {
     return this.http.post(`${environment.api}/api/Auth/Login`, user);
   }
 
@@ -22,4 +22,9 @@ export class AuthService {
       { responseType: 'text' }
     );
   }
-}
+
+  // Method for email confirmation
+  confirmEmail(token: string){ 
+    return this.http.get(`${environment.api}/api/Auth/confirm-email?token=${token}`);
+  }
+} 

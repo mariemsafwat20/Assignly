@@ -1,0 +1,21 @@
+// Auth Link(Go To Login Page)
+.auth-link {
+  p {
+    font-family: "Poppins", sans-serif;
+    color: #545454;
+    font-size: 0.95rem;
+  }
+
+  a {
+    font-family: "Poppins", sans-serif;
+    color: #456882;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: #1B3C53;
+      text-decoration: underline;
+    }
+  }
+}
